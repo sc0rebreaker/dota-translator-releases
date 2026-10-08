@@ -19,6 +19,7 @@
     var a = e.target.closest && e.target.closest('a[href]');
     if (!a) return;
     var href = a.getAttribute('href');
+    if (a.classList.contains('skin-nav')) gtag('event', 'skin_changer_click', { page: location.pathname });
     var where = location.pathname.split('/').pop() || 'index.html';
     // The Treasure Simulator's glowing "Try Dota Translator" button (the user,
     // 2026-10-04: does the simulator crowd come over?). Phone or desktop,
