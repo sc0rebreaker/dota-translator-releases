@@ -19,7 +19,8 @@
     var a = e.target.closest && e.target.closest('a[href]');
     if (!a) return;
     var href = a.getAttribute('href');
-    if (a.classList.contains('skin-nav')) gtag('event', 'skin_changer_click', { page: location.pathname });
+    if (a.classList.contains('skin-nav') || a.getAttribute('data-product') === 'skin-changer') gtag('event', 'skin_changer_click', { page: location.pathname, placement: a.classList.contains('related-card') ? 'more' : 'navigation' });
+    if (a.classList.contains('related-card')) gtag('event', 'related_product_click', { page: location.pathname, product: a.getAttribute('data-product'), placement: 'more' });
     var where = location.pathname.split('/').pop() || 'index.html';
     // The Treasure Simulator's glowing "Try Dota Translator" button (the user,
     // 2026-10-04: does the simulator crowd come over?). Phone or desktop,

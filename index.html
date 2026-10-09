@@ -16,9 +16,9 @@
 <style>
   /* One file, no build. Every number on this page is a measurement from
      CLAUDE.md, and every translation shown is what the model really
-     answered; if one changes there, change it here. No screenshots of the
-     game are used: the scene in the slider is drawn in CSS. The hero
-     portraits are LINKED from Valve's own image server (the app itself reads
+     answered; if one changes there, change it here. The chat scene in the
+     slider is drawn in CSS. Its hero portraits are LINKED from Valve's own
+     image server (the app itself reads
      them from the player's install, and falls back to that server) - none
      of them is in this repo, and none should be. */
   :root {
@@ -216,6 +216,30 @@
   details p { color: var(--dim); padding: 0 0 20px; }
   details a { color: var(--accent); }
 
+  .related-section { padding-top: 24px; }
+  .related-heading { margin-bottom: 36px; }
+  .related-eyebrow { color: var(--accent); font-size: 12px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; }
+  .related-heading h2 { margin-top: 14px; }
+  .related-heading h2 em { color: var(--accent); }
+  .related-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+  .related-card { display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--line-strong); border-radius: 14px; background: var(--panel); text-decoration: none; transition: border-color 0.2s; }
+  .related-card:hover { border-color: var(--accent); }
+  .related-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+  .related-preview { aspect-ratio: 1.8; background: #080d10; overflow: hidden; padding: 18px; }
+  .related-preview img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 6px; }
+  .treasure-preview { background: radial-gradient(ellipse at center, rgba(68, 48, 23, 0.33), #080d10 75%); }
+  .related-copy { padding: 28px; display: flex; flex-direction: column; flex: 1; }
+  .related-copy .related-eyebrow { font-size: 11px; }
+  .related-copy h3 { font: 500 34px/1.2 var(--serif); margin-top: 10px; }
+  .related-copy p { font-size: 17px; line-height: 1.75; color: var(--dim); margin-top: 15px; margin-bottom: 24px; }
+  .related-action { display: flex; align-items: center; gap: 9px; color: var(--accent); font-size: 15px; font-weight: 600; margin-top: auto; }
+  .related-action svg { width: 18px; height: 18px; flex-shrink: 0; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  @media (max-width: 780px) {
+    .related-grid { grid-template-columns: 1fr; }
+    .related-copy { padding: 24px; }
+    .related-copy h3 { font-size: 30px; }
+  }
+
   .end { text-align: center; padding: 96px 0 72px; }
   .end .cta { justify-content: center; }
   footer { border-top: 1px solid var(--line); padding: 26px 0 40px; color: var(--faint); font-size: 13.5px; }
@@ -259,9 +283,9 @@
     nav .download-nav { order: 2; }
     nav a.skin-nav { order: 3; flex-basis: 100%; justify-content: center; }
   }
-  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn { transition: none; } .skin-nav img, nav a.skin-nav:hover img { animation: none; transform: translateY(-50%); } }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn, .related-card { transition: none; } .skin-nav img, nav a.skin-nav:hover img { animation: none; transform: translateY(-50%); } }
 </style>
-<script src="analytics.js" defer></script>
+<script src="analytics.js?v=20261009-related" defer></script>
 </head>
 <body>
 
@@ -516,6 +540,35 @@
       <details><summary>Can I check what it does?</summary><p>What you can check without taking my word: the source is public on <a href="https://github.com/sc0rebreaker/dota-translator-app" rel="noopener">GitHub</a>, each installer's SHA-256 fingerprint and its VirusTotal report are on <a href="download.html#safe">the download page</a>, and what it does on your PC is listed in <a href="#catch">the catch</a>.</p></details>
       <details><summary>Can I ask for a change?</summary><p>Yes. Use the <a href="https://forms.gle/4UwGB5drooGT4mUB9" rel="noopener">feedback form</a> - one box, nothing to register, and the app's tray menu opens it too - a bug, a wrong translation, text in the wrong place, a language you want.</p></details>
       <details><summary>What does it cost?</summary><p>Nothing. It is free, and runs on your own Gemini key, which is free from Google AI Studio (<a href="key.html">how to get one</a>). Google's free tier covers normal play. Outside the EU, Switzerland and the UK, Google's terms let it use what is sent on the free tier to improve its products; inside them, and on any key with billing set up, Google says it does not. Either way that is between you and Google: nothing goes to us. If you would like to support the project, there is <a href="https://ko-fi.com/sc0rebreaker" rel="noopener">Ko-fi</a> - it is a thank-you, not a payment: nobody gets anything extra.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="related-section" id="more" aria-labelledby="related-title">
+  <div class="wrap">
+    <div class="related-heading">
+      <p class="related-eyebrow">More for your Dota</p>
+      <h2 id="related-title">A little more <em>to explore.</em></h2>
+    </div>
+    <div class="related-grid">
+      <a class="related-card" data-product="skin-changer" href="https://dotaskinchanger.live/">
+        <div class="related-preview"><img src="products/skin-changer.webp" width="1000" height="570" alt="Dota Skin Changer website showing an Arcana in Dota's Armory" loading="lazy" decoding="async"></div>
+        <div class="related-copy">
+          <span class="related-eyebrow">Your favorite skins, unlocked</span>
+          <h3>Dota Skin Changer</h3>
+          <p>Choose arcanas, personas, and custom effects in Dota's Armory. Your loadout saves automatically, ready for your next match.</p>
+          <span class="related-action">Explore Dota Skin Changer <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 18 18 6M6 6h12v12"/></svg></span>
+        </div>
+      </a>
+      <a class="related-card" data-product="treasure-simulator" href="treasures/">
+        <div class="related-preview treasure-preview"><img src="products/treasures.webp" width="1000" height="570" alt="Dota Treasure Simulator with treasures to explore and open in the browser" loading="lazy" decoding="async"></div>
+        <div class="related-copy">
+          <span class="related-eyebrow">Try your luck, just for fun</span>
+          <h3>Dota Treasure Simulator</h3>
+          <p>Explore treasure contents, simulate openings, and follow your results using odds based on Dota's in-game data. All in your browser, with no real purchases or items granted.</p>
+          <span class="related-action">Try the Treasure Simulator <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 18 18 6M6 6h12v12"/></svg></span>
+        </div>
+      </a>
     </div>
   </div>
 </section>
