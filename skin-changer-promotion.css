@@ -1,0 +1,90 @@
+/* One shared promotion button for the home page and treasure simulator. */
+.skin-nav,
+.skin-cta {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 46px;
+  padding: 7px 15px 7px 70px;
+  border: 1px solid rgba(240, 180, 76, 0.48);
+  border-radius: 9px;
+  background: linear-gradient(135deg, rgba(240, 180, 76, 0.17), rgba(240, 180, 76, 0.05));
+  color: #ffd48a;
+  font: 700 14px Inter, system-ui, sans-serif;
+  text-decoration: none;
+  white-space: nowrap;
+  box-sizing: border-box;
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.08), 0 0 18px rgba(240, 180, 76, 0.09);
+  transition: background 150ms ease, border-color 150ms ease, box-shadow 150ms ease, transform 150ms ease;
+}
+
+.skin-nav:hover,
+.skin-cta:hover {
+  transform: translateY(-1px);
+  border-color: #f0b44c;
+  background: rgba(240, 180, 76, 0.2);
+  box-shadow: 0 0 22px rgba(240, 180, 76, 0.19);
+}
+
+.skin-nav:focus-visible,
+.skin-cta:focus-visible { outline: 2px solid #f0b44c; outline-offset: 3px; }
+
+.skin-nav img,
+.skin-cta img {
+  position: absolute;
+  left: 5px;
+  top: 50%;
+  width: 56px;
+  height: 56px;
+  pointer-events: none;
+  transform: translateY(-50%) rotate(-2deg);
+  transform-origin: 55% 65%;
+  filter: drop-shadow(0 2px 4px #000) drop-shadow(0 0 9px rgba(240, 180, 76, 0.48));
+  animation: skin-float 3.2s ease-in-out infinite;
+}
+
+.skin-nav:hover img,
+.skin-cta:hover img {
+  filter: drop-shadow(0 1px 2px #000) drop-shadow(0 0 3px rgba(240, 180, 76, 0.7));
+  animation: skin-wiggle 550ms ease-in-out 1;
+}
+
+@keyframes skin-float {
+  0%, 100% { transform: translateY(-50%) rotate(-2deg); }
+  50% { transform: translateY(calc(-50% - 2px)) rotate(2deg); }
+}
+
+@keyframes skin-wiggle {
+  0%, 100% { transform: translateY(-50%) rotate(-2deg); }
+  25% { transform: translateY(-50%) rotate(3deg); }
+  55% { transform: translateY(-50%) rotate(-3deg); }
+  80% { transform: translateY(-50%) rotate(2deg); }
+}
+
+/* Animated SVG strokes keep an even speed around the rounded border. */
+.skin-nav::before,
+.skin-cta::before {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+  inset: -5px;
+  background: url('skin-changer-orbit.svg?v=20261009-10s') center / 100% 100% no-repeat;
+}
+
+@media (max-width: 700px) {
+  .skin-nav,
+  .skin-cta { min-height: 48px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skin-nav::before,
+  .skin-cta::before { background-image: none; }
+  .skin-nav,
+  .skin-cta { transition: none; }
+  .skin-nav img,
+  .skin-cta img,
+  .skin-nav:hover img,
+  .skin-cta:hover img { animation: none; transform: translateY(-50%); }
+}
