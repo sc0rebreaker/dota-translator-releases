@@ -1,163 +1,130 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-<link rel="icon" href="favicon.ico" sizes="any">
-<link rel="icon" type="image/webp" href="logo-192.webp">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0a0d10">
+<title>Dota Translator Setup Guide | Email Sign-in &amp; Chat Overlay</title>
+<meta name="description" content="Set up Dota Translator on Windows: email sign-in, the Dota 2 chat overlay and translated Ctrl+Enter replies. No personal Gemini API key needed.">
+<link rel="canonical" href="https://dotatranslator.live/key.html">
+<meta name="robots" content="index, follow, max-image-preview:large, max-video-preview:-1">
+<link rel="icon" href="/logo-64.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,500;1,6..72,500&display=swap" rel="stylesheet">
-<style>
-  /* The key guide. Same look as index.html. THE PICTURES ARE DRAWINGS, made
-     here in HTML: a real screenshot of Google AI Studio would show
-     somebody's account and somebody's live key. They follow Google's own
-     description of the flow (ai.google.dev/gemini-api/docs/api-key, read
-     2026-09-20); if Google moves a button, change the drawing AND the
-     words, and the date at the bottom. */
-  :root {
-    --bg: #0a0d10; --panel: #11161b; --panel-2: #161c22;
-    --line: rgba(200, 215, 230, 0.10); --line-strong: rgba(200, 215, 230, 0.22);
-    --text: #f4f6f8; --dim: rgba(244, 246, 248, 0.68); --faint: #8b95a3;
-    --accent: #f0b44c; --accent-ink: #231703; --good: #7bd88f; --warn: #e58b6b;
-    --serif: 'Newsreader', 'Iowan Old Style', Georgia, serif;
-    --sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
-    --mono: ui-monospace, 'Cascadia Mono', Consolas, monospace;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: radial-gradient(900px 480px at 78% -8%, rgba(240, 180, 76, 0.10), transparent 60%), var(--bg); color: var(--text); font-family: var(--sans); font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
-  a { color: var(--accent); }
-  .wrap { max-width: 860px; margin: 0 auto; padding: 0 24px; }
-  nav { position: sticky; top: 0; z-index: 20; backdrop-filter: blur(10px); background: rgba(10, 13, 16, 0.78); border-bottom: 1px solid var(--line); }
-  nav .wrap { display: flex; align-items: center; height: 62px; max-width: 1120px; }
-  .brand { display: inline-flex; align-items: center; gap: 10px; font-family: var(--serif); font-size: 21px; text-decoration: none; color: var(--text); margin-right: auto; white-space: nowrap; }
-  .brand b { color: var(--accent); font-weight: 500; font-style: italic; }
-  nav a.back { color: var(--dim); text-decoration: none; font-size: 15px; }
-  h1, h2 { font-family: var(--serif); font-weight: 500; letter-spacing: -0.01em; line-height: 1.08; text-wrap: balance; }
-  h1 { font-size: clamp(38px, 5.4vw, 60px); margin-top: 64px; }
-  h1 span { color: var(--accent); font-style: italic; }
-  .sub { color: var(--dim); font-size: 19px; margin-top: 18px; max-width: 640px; }
-  .facts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
-  .facts span { border: 1px solid var(--line-strong); border-radius: 999px; padding: 6px 13px; font-size: 14px; color: var(--dim); }
-  .facts b { color: var(--text); font-weight: 600; }
-
-  .step { margin-top: 64px; counter-increment: s; }
-  body { counter-reset: s; }
-  .step h2 { font-size: clamp(26px, 3.2vw, 34px); display: flex; gap: 14px; align-items: baseline; }
-  .step h2::before { content: counter(s); flex: none; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--accent); color: var(--accent-ink); font-family: var(--sans); font-weight: 700; font-size: 16px; transform: translateY(-4px); }
-  /* The heading of step 4 ends in a file name that will not break: at
-     phone width it pushed the page a pixel wide. */
-  .step h2 code { font-size: 0.74em; }
-  .step p { color: var(--dim); margin-top: 12px; }
-  .step p b, .step li b { color: var(--text); font-weight: 600; }
-  .step ul { margin: 12px 0 0 22px; color: var(--dim); display: grid; gap: 6px; }
-  code { font-family: var(--mono); font-size: 0.88em; background: rgba(255, 255, 255, 0.07); padding: 2px 6px; border-radius: 5px; color: var(--text); }
-  kbd { font-family: var(--mono); font-size: 0.82em; border: 1px solid var(--line-strong); border-bottom-width: 2px; border-radius: 5px; padding: 1px 6px; }
-
-  /* the pictures */
-  figure { margin-top: 22px; }
-  figcaption { color: var(--faint); font-size: 13.5px; margin-top: 9px; }
-  .shot { border: 1px solid var(--line-strong); border-radius: 12px; overflow: hidden; background: #fbfbfd; color: #1f2328; font-size: 14px; line-height: 1.4; box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45); }
-  .bar { display: flex; align-items: center; gap: 10px; padding: 9px 12px; background: #e9ebf0; border-bottom: 1px solid #d5d8df; }
-  .bar i { width: 10px; height: 10px; border-radius: 50%; background: #c3c7d0; flex: none; }
-  .url { flex: 1; background: #fff; border-radius: 999px; padding: 4px 12px; font-family: var(--mono); font-size: 12px; color: #4b5260; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .url b { color: #1f2328; font-weight: 600; }
-  .app { display: grid; grid-template-columns: 170px 1fr; min-height: 250px; }
-  .side { background: #f1f2f6; border-right: 1px solid #e0e3ea; padding: 14px 10px; display: grid; gap: 4px; align-content: start; font-size: 13px; color: #4b5260; }
-  .side .logo { font-weight: 700; color: #1f2328; padding: 4px 8px 10px; }
-  .side span { padding: 6px 8px; border-radius: 7px; }
-  .side .on { background: #dfe6fb; color: #1b3fa8; font-weight: 600; }
-  .main { padding: 18px 20px; position: relative; min-width: 0; overflow: hidden; }
-  .main h4 { font-size: 18px; font-weight: 600; }
-  .rowline { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-  .gbtn { background: #1b5fe0; color: #fff; border-radius: 999px; padding: 8px 16px; font-weight: 600; font-size: 13px; white-space: nowrap; }
-  .gbtn.ghost { background: #fff; color: #1b5fe0; border: 1px solid #c9d3ea; }
-  table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 13px; }
-  th { text-align: left; color: #6a7180; font-weight: 500; padding: 7px 8px; border-bottom: 1px solid #e0e3ea; }
-  td { padding: 10px 8px; border-bottom: 1px solid #eceef3; }
-  td.k { font-family: var(--mono); color: #1f2328; }
-  .pill { display: inline-block; border-radius: 999px; padding: 2px 9px; font-size: 12px; background: #e3f4e7; color: #17692e; font-weight: 600; }
-  /* the ring that says "here" */
-  .here { position: relative; }
-  .here::after { content: ''; position: absolute; inset: -7px -9px; border: 3px solid var(--accent); border-radius: 999px; box-shadow: 0 0 0 4px rgba(240, 180, 76, 0.25); pointer-events: none; }
-  .here.sq::after { border-radius: 10px; }
-  .dialog { margin: 6px auto 0; max-width: 430px; border: 1px solid #d5d8df; border-radius: 14px; padding: 18px; background: #fff; box-shadow: 0 10px 30px rgba(20, 30, 60, 0.18); }
-  .dialog h4 { font-size: 16px; }
-  .dialog p { color: #4b5260; font-size: 13px; margin-top: 6px; }
-  .field { margin-top: 12px; border: 1px solid #c9d3ea; border-radius: 9px; padding: 9px 12px; font-family: var(--mono); font-size: 12.5px; display: flex; justify-content: space-between; gap: 10px; align-items: center; background: #f7f8fb; }
-  .field span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .editor { background: #0f1317; color: #d7dde5; font-family: var(--mono); font-size: 13.5px; line-height: 1.7; padding: 16px 18px; white-space: pre; overflow-x: auto; }
-  .editor .k { color: #8ab4f8; } .editor .s { color: #a5d6a7; } .editor .hl { background: rgba(240, 180, 76, 0.18); outline: 1px solid rgba(240, 180, 76, 0.6); border-radius: 4px; padding: 1px 3px; color: #ffe2a8; }
-  /* the app's own window, drawn */
-  .shot.appwin { background: #0a0d10; color: #f4f6f8; }
-  .bar.dark { background: #1a1f25; border-bottom-color: #2a313a; }
-  .bar.dark .url { background: transparent; color: #aab3bf; font-family: var(--sans); }
-  .bar.dark i { background: #3a424d; }
-  .appbody { padding: 22px 26px 26px; display: grid; gap: 12px; font-size: 14px; }
-  .apptitle { font-family: var(--serif); font-size: 24px; } .apptitle em { color: var(--accent); }
-  .applabel { font-weight: 600; font-size: 13px; margin-top: 4px; }
-  .appfield { display: flex; justify-content: space-between; align-items: center; gap: 10px; background: #11161b; border: 1px solid var(--accent); border-radius: 10px; padding: 10px 14px; font-family: var(--mono); letter-spacing: 1px; color: #d7dde5; }
-  .appghost { font-family: var(--sans); letter-spacing: 0; font-weight: 600; font-size: 13px; color: #f4f6f8; border: 1px solid rgba(200, 215, 230, 0.24); border-radius: 8px; padding: 5px 10px; }
-  .appok { border: 1px solid rgba(200, 215, 230, 0.24); border-left: 3px solid var(--good); background: rgba(123, 216, 143, 0.07); border-radius: 10px; padding: 10px 13px; color: #d7dde5; }
-  .appbtn { display: inline-block; background: var(--accent); color: var(--accent-ink); font-weight: 600; border-radius: 10px; padding: 10px 18px; }
-  .tab { background: #1a2027; color: #aab3bf; font-family: var(--mono); font-size: 12px; padding: 7px 14px; border-bottom: 1px solid #242b33; }
-
-  .note { margin-top: 18px; border: 1px solid var(--line-strong); border-left: 3px solid var(--accent); border-radius: 10px; padding: 14px 16px; color: var(--dim); background: var(--panel); font-size: 15.5px; }
-  .note.warn { border-left-color: var(--warn); }
-  .note b { color: var(--text); }
-  .trouble { margin-top: 64px; }
-  .trouble h2 { font-size: clamp(26px, 3.2vw, 34px); }
-  details { border-bottom: 1px solid var(--line); }
-  summary { cursor: pointer; list-style: none; padding: 16px 28px 16px 0; font-weight: 600; position: relative; }
-  summary::-webkit-details-marker { display: none; }
-  summary::after { content: '+'; position: absolute; right: 4px; top: 12px; font-size: 24px; font-weight: 400; color: var(--accent); }
-  details[open] summary::after { content: '\2013'; }
-  details p { color: var(--dim); padding: 0 0 18px; }
-  .end { margin: 64px 0 40px; display: flex; flex-wrap: wrap; gap: 12px; }
-  .btn { white-space: nowrap; display: inline-flex; align-items: center; border-radius: 12px; padding: 14px 20px; font-weight: 600; font-size: 16px; text-decoration: none; border: 1px solid var(--line-strong); color: var(--text); }
-  .btn.solid { background: var(--accent); color: var(--accent-ink); border-color: transparent; }
-  footer { border-top: 1px solid var(--line); padding: 24px 0 40px; color: var(--faint); font-size: 13.5px; }
-  @media (max-width: 640px) {
-    .app { grid-template-columns: minmax(0, 1fr); } .side { display: none; }
-    .main { padding: 14px 12px; }
-    .shot { font-size: 12.5px; } table { font-size: 11.5px; } th, td { padding-left: 4px; padding-right: 4px; }
-    th:nth-child(3), td:nth-child(3) { display: none; }
-    .gbtn { padding: 7px 11px; font-size: 12px; }
-    h1 { margin-top: 40px; } .step, .trouble { margin-top: 48px; }
-    .btn { width: 100%; justify-content: center; }
-  }
-</style>
-<script src="analytics.js" defer></script>
-
-<title>Dota Translator Setup | Email Sign-in, No API Key Needed</title>
-<meta name="description" content="Set up the current Dota Translator with email-code sign-in. No personal Gemini API key is needed. Try it free for three days.">
-<link rel="canonical" href="https://dotatranslator.live/key.html">
-<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,500;1,6..72,500&amp;display=swap">
+<link rel="stylesheet" href="/guides-20261017.css">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Dota Translator">
-<meta property="og:title" content="Dota Translator Email Sign-in | Setup Guide">
-<meta property="og:description" content="Set up the current Dota Translator with email-code sign-in. No personal Gemini API key is needed. Try it free for three days.">
+<meta property="og:title" content="Dota Translator Setup Guide | Email Sign-in &amp; Chat Overlay">
+<meta property="og:description" content="Set up Dota Translator on Windows: email sign-in, the Dota 2 chat overlay and translated Ctrl+Enter replies. No personal Gemini API key needed.">
 <meta property="og:url" content="https://dotatranslator.live/key.html">
 <meta property="og:image" content="https://dotatranslator.live/logo-512.webp">
 <meta property="og:image:alt" content="Dota Translator logo">
-<meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Dota Translator Email Sign-in | Setup Guide">
-<meta name="twitter:description" content="Set up the current Dota Translator with email-code sign-in. No personal Gemini API key is needed. Try it free for three days.">
+<meta name="twitter:title" content="Dota Translator Setup Guide | Email Sign-in &amp; Chat Overlay">
+<meta name="twitter:description" content="Set up Dota Translator on Windows: email sign-in, the Dota 2 chat overlay and translated Ctrl+Enter replies. No personal Gemini API key needed.">
 <meta name="twitter:image" content="https://dotatranslator.live/logo-512.webp">
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "@id": "https://dotatranslator.live/#website", "url": "https://dotatranslator.live/", "name": "Dota Translator", "inLanguage": ["en", "ru"]}, {"@type": "WebPage", "@id": "https://dotatranslator.live/key.html#webpage", "url": "https://dotatranslator.live/key.html", "name": "Dota Translator Email Sign-in | Setup Guide", "description": "Set up the current Dota Translator with email-code sign-in. No personal Gemini API key is needed. Try it free for three days.", "inLanguage": "en", "isPartOf": {"@id": "https://dotatranslator.live/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Dota Translator", "item": "https://dotatranslator.live/"}, {"@type": "ListItem", "position": 2, "name": "Get a Gemini API Key for Dota Translator", "item": "https://dotatranslator.live/key.html"}]}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "@id": "https://dotatranslator.live/#website", "url": "https://dotatranslator.live/", "name": "Dota Translator"}, {"@type": "WebPage", "@id": "https://dotatranslator.live/key.html#webpage", "url": "https://dotatranslator.live/key.html", "name": "Dota Translator Setup Guide | Email Sign-in & Chat Overlay", "description": "Set up Dota Translator on Windows: email sign-in, the Dota 2 chat overlay and translated Ctrl+Enter replies. No personal Gemini API key needed.", "inLanguage": "en", "isPartOf": {"@id": "https://dotatranslator.live/#website"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Dota Translator", "item": "https://dotatranslator.live/"}, {"@type": "ListItem", "position": 2, "name": "Set up Dota Translator", "item": "https://dotatranslator.live/key.html"}]}]}</script>
+<script src="/analytics.js" defer>
+</script>
 </head>
 <body>
-
-<nav><div class="wrap">
-  <a class="brand" href="./"><img src="logo-64.webp" width="30" height="30" alt=""><span>Dota <b>Translator</b></span></a>
-  <a class="back" href="./">&larr; Back</a>
-</div></nav>
-
-<main><div class="wrap"><h1>No API key needed</h1><p class="sub">The current Dota Translator includes hosted translation. Download the update, sign in with your email and enter the six-digit code.</p><p>Your first successful sign-in starts a 3-day free trial. After that, access is EUR 7 for 3 months. There is no lifetime plan or automatic renewal.</p><p>This page previously described the personal Gemini-key setup used by older versions. The current app does not need your own key.</p><a class="btn solid" href="download.html">Get the current version</a></div></main>
-
-<footer><div class="wrap">The pictures on this page are illustrations. Google can move things around; this matched Google's own instructions on 20 September 2026. Not affiliated with Google or Valve.</div></footer>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="guide-header">
+<div class="wrap">
+<a class="brand" href="/" aria-label="Dota Translator home">
+<img src="/logo-64.webp" alt="" width="30" height="30">Dota <b>Translator</b>
+</a>
+<nav aria-label="Main navigation">
+<a href="/">Overview</a>
+<a href="/key.html">Setup guide</a>
+<a class="button" href="/download.html">Download</a>
+</nav>
+</div>
+</header>
+<main id="main" class="wrap">
+<nav class="crumbs" aria-label="Breadcrumb">
+<ol>
+<li>
+<a href="/">Dota Translator</a>
+</li>
+<li aria-current="page">Setup guide</li>
+</ol>
+</nav>
+<header class="guide-intro">
+<p class="kicker">From download to your first game</p>
+<h1>Set up Dota Translator</h1>
+<p class="lead">Read your teammates’ chat in English and reply in their language. The current app includes hosted translation, so setup starts with your email, not an API key.</p>
+</header>
+<div class="guide-layout">
+<aside class="toc" aria-label="On this page">
+<strong>On this page</strong>
+<a href="#install">Install and sign in</a>
+<a href="#display">Dota display mode</a>
+<a href="#restart">Restart Dota once</a>
+<a href="#read">Incoming translations</a>
+<a href="#reply">Translated replies</a>
+<a href="#help">Troubleshooting</a>
+</aside>
+<article class="guide-content">
+<section id="install">
+<h2>Download and sign in</h2>
+<p>Install the current <a href="/download.html">Dota Translator for Windows</a>. The app includes hosted translation, so you do not need to create or paste a personal Gemini API key.</p>
+<ol>
+<li>Open Dota Translator. For translated Ctrl+Enter replies, right-click the app and choose <strong>Run as administrator</strong> so Windows can send the translated input to Dota.</li>
+<li>Enter your email address and request a sign-in email.</li>
+<li>Enter the six-digit code, or open the sign-in link while keeping the requesting app open.</li>
+</ol>
+<p>Your first successful sign-in starts the 3-day trial. After the trial, access costs €7 for 3 months, paid when you choose to renew.</p>
+</section>
+<section id="display">
+<h2>Use Borderless Window or Windowed mode</h2>
+<p>In Dota, open <strong>Settings → Video → Display Mode</strong> and choose <strong>Borderless Window</strong> or <strong>Windowed</strong>. The translation overlay is a separate window above the game's chat. Exclusive fullscreen can prevent that window from appearing over Dota.</p>
+<p>This changes Dota's display mode. There is no need to lower your desktop screen resolution.</p>
+</section>
+<section id="restart">
+<h2>Restart Dota once after setup</h2>
+<p>Dota reads its Game State Integration chat-feed configuration when the game starts. After installing Translator, restart Dota once so that it can pick up the feed.</p>
+<p>Leave Translator running while you play. It lives in the Windows system tray near the clock when its setup window is closed.</p>
+</section>
+<section id="read">
+<h2>Read Russian, Spanish and Chinese chat in English</h2>
+<p>Incoming translations appear above Dota's own chat. The original game chat remains available. Dota Translator works from the game's chat feed, so it does not require you to copy every incoming message or take a screenshot yourself.</p>
+<p>Only lines needing translation are sent through the hosted service. Repeated translations can be reused from a temporary cache, which avoids making the same translation request again. Names, game slang and short messages can still be ambiguous; use the original line for context.</p>
+</section>
+<section id="reply">
+<h2>Send a translated reply with Ctrl+Enter</h2>
+<p>Choose your outgoing language in Translator's settings. Type into Dota chat as usual, then press <strong>Ctrl+Enter</strong> when you want Translator to translate and send that reply. Plain Enter sends the text as you typed it.</p>
+<p>For example, the website demo shows <span lang="ru">«иду топ, помогите»</span> translated as “going top, help”. The shortcut acts only when you ask to send a reply while Dota is in front.</p>
+</section>
+<section id="help">
+<h2>If the overlay or replies do not work</h2>
+<ul>
+<li>
+<strong>No incoming translations:</strong> check that you are signed in with active access, Dota has been restarted after setup, and your internet connection works.</li>
+<li>
+<strong>The overlay is hidden:</strong> check Dota's display mode and whether the overlay was hidden with Alt+D. That shortcut can be changed in settings.</li>
+<li>
+<strong>Ctrl+Enter does not send:</strong> check the outgoing-language setting and run Dota Translator as administrator, then try again with Dota in front.</li>
+<li>
+<strong>Old API-key instructions:</strong> update the app. The current version uses hosted translation and email sign-in.</li>
+</ul>
+<p>If a problem persists, email <a href="mailto:support@dotatranslator.live">support@dotatranslator.live</a>. Include the app version, what you expected and what happened. See the <a href="/privacy.html">privacy details</a> for how chat, account and usage information is handled.</p>
+<div class="actions">
+<a class="button" href="/download.html">Download Dota Translator</a>
+<a href="/#faq">Questions and pricing</a>
+</div>
+</section>
+</article>
+</div>
+</main>
+<footer class="guide-footer">
+<div class="wrap">
+<p>A fan project. Not affiliated with or endorsed by Valve. Dota 2 is a trademark of Valve Corporation.</p>
+<p>
+<a href="/privacy.html">Privacy</a> · <a href="mailto:support@dotatranslator.live">Support</a>
+</p>
+</div>
+</footer>
 </body>
 </html>

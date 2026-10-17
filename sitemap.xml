@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://dotatranslator.live/</loc></url>
-  <url><loc>https://dotatranslator.live/ru/</loc></url>
-  <url><loc>https://dotatranslator.live/download.html</loc></url>
-  <url><loc>https://dotatranslator.live/key.html</loc></url>
-  <url><loc>https://dotatranslator.live/privacy.html</loc></url>
-  <url><loc>https://dotatranslator.live/treasures/</loc></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+  <url><loc>https://dotatranslator.live/</loc><lastmod>2026-10-17</lastmod>
+  </url>
+  <url><loc>https://dotatranslator.live/ru/</loc><lastmod>2026-10-17</lastmod>
+  </url>
+  <url><loc>https://dotatranslator.live/download.html</loc><lastmod>2026-10-17</lastmod>
+  </url>
+  <url><loc>https://dotatranslator.live/key.html</loc><lastmod>2026-10-17</lastmod>
+  </url>
+  <url><loc>https://dotatranslator.live/privacy.html</loc>
+  </url>
+  <url><loc>https://dotatranslator.live/treasures/</loc>
+  </url>
 </urlset>
