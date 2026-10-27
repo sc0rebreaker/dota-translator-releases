@@ -1,3 +1,12 @@
+/* Temporary promotion pause. Remove the body class to restore these links. */
+body.skin-promotion-paused .skin-nav,
+body.skin-promotion-paused .related-card[data-product="skin-changer"] {
+  display: none !important;
+}
+body.skin-promotion-paused .related-grid {
+  grid-template-columns: minmax(0, 1fr);
+}
+
 /* One shared promotion button for the home page and treasure simulator. */
 .skin-nav,
 .skin-cta {
