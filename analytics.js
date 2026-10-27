@@ -4,14 +4,55 @@
 (function () {
   var ID = 'G-RX1LXWKFZD';
   if (!/^https?:$/.test(location.protocol) || /^(localhost|127\.)/.test(location.hostname)) return;
-  var s = document.createElement('script');
-  s.async = true;
-  s.src = 'https://www.googletagmanager.com/gtag/js?id=' + ID;
-  document.head.appendChild(s);
+  var enabled = false, loaded = false;
+  var preference = null;
+  try { preference = localStorage.getItem('dt_website_analytics'); } catch (_) {}
   window.dataLayer = window.dataLayer || [];
-  function gtag() { window.dataLayer.push(arguments); }
-  gtag('js', new Date());
-  gtag('config', ID);
+  function gtag() { if (enabled) window.dataLayer.push(arguments); }
+  function enable() {
+    enabled = true; window['ga-disable-' + ID] = false;
+    if (loaded) return;
+    loaded = true;
+    var script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://www.googletagmanager.com/gtag/js?id=' + ID;
+    document.head.appendChild(script);
+    gtag('js', new Date()); gtag('config', ID);
+  }
+  function choose(accept) {
+    enabled = accept; window['ga-disable-' + ID] = !accept;
+    try { localStorage.setItem('dt_website_analytics', accept ? 'yes' : 'no'); } catch (_) {}
+    if (accept) enable();
+    else document.cookie.split('; ').map(function (v) { return v.split('=')[0]; }).filter(function (n) { return n === '_ga' || n.indexOf('_ga_') === 0; }).forEach(function (n) {
+      document.cookie = n + '=; Max-Age=0; Path=/; Secure; SameSite=Lax';
+      document.cookie = n + '=; Max-Age=0; Path=/; Domain=dotatranslator.live; Secure; SameSite=Lax';
+    });
+    panel.hidden = true;
+  }
+  var style = document.createElement('link'); style.rel = 'stylesheet'; style.href = '/privacy-banner.css?v=20261028'; document.head.appendChild(style);
+  var panel = document.createElement('section'); panel.className = 'dt-privacy'; panel.setAttribute('aria-label', 'Privacy choices');
+  panel.innerHTML = '<div class="dt-privacy-summary"><p>We use optional cookies for website analytics. <a href="/privacy.html">Privacy details</a></p></div><div class="dt-privacy-details" hidden><h2>Your privacy choices</h2><p>Google Analytics helps us understand website visits and interactions, including download clicks. It is optional and is not needed to use Dota Translator.</p><label><input type="checkbox" id="dt-analytics"> Website analytics</label></div><div class="dt-privacy-actions"><button type="button" data-choice="accept">Accept</button><button type="button" data-choice="reject">Reject</button><button type="button" data-action="settings">Settings</button><button type="button" data-choice="save" hidden>Save choices</button><button type="button" data-action="back" hidden>Back</button></div>';
+  document.body.appendChild(panel);
+  function details(open) {
+    panel.querySelector('.dt-privacy-summary').hidden = open;
+    panel.querySelector('.dt-privacy-details').hidden = !open;
+    panel.querySelector('[data-action="settings"]').hidden = open;
+    panel.querySelector('[data-choice="save"]').hidden = !open;
+    panel.querySelector('[data-action="back"]').hidden = !open;
+    panel.classList.toggle('dt-privacy-expanded', open);
+    if (open) panel.querySelector('#dt-analytics').checked = enabled;
+  }
+  panel.addEventListener('click', function (event) {
+    var action = event.target.closest('button[data-action]');
+    if (action) { var open = action.dataset.action === 'settings'; details(open); panel.querySelector(open ? '#dt-analytics' : '[data-action="settings"]').focus(); return; }
+    var button = event.target.closest('button[data-choice]');
+    if (button) choose(button.dataset.choice === 'accept' || button.dataset.choice === 'save' && panel.querySelector('#dt-analytics').checked);
+  });
+  var settings = document.createElement('button'); settings.type = 'button'; settings.className = 'dt-privacy-settings'; settings.textContent = 'Privacy choices';
+  (document.querySelector('footer') || document.body).appendChild(settings);
+  settings.addEventListener('click', function () { details(true); panel.hidden = false; panel.querySelector('#dt-analytics').focus(); });
+  if (preference === 'yes') enable();
+  panel.hidden = preference === 'yes' || preference === 'no';
 
   // What a page view cannot say: did anybody press the button? The
   // download is a link to GitHub, so without this it leaves no trace.
