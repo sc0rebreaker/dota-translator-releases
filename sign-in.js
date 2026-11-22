@@ -9,7 +9,7 @@
     if (analyticsReady) return;
     // The login secret has been consumed and cleared before third-party code loads.
     analyticsReady = document.createElement('script');
-    analyticsReady.src = '/analytics.js?v=20261028-reddit';
+    analyticsReady.src = '/analytics.js?v=20261122-labels';
     analyticsReady.onload = function () { if (completedSignup && window.dtMeasurement) window.dtMeasurement.signup(completedSignup); };
     document.head.appendChild(analyticsReady);
   }
