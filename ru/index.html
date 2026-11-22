@@ -79,25 +79,25 @@
 <script src="/analytics.js?v=20261028-reddit" defer></script>
 
 <title>Переводчик чата Dota 2 | Dota Translator</title>
-<meta name="description" content="Переводи чат Dota 2 и отправляй ответы на английском через Ctrl+Enter. Приложение для Windows: вход по email, 3 дня бесплатно, без своего ключа Gemini.">
+<meta name="description" content="Переводи чат Dota 2 и отправляй ответы на английском через Ctrl+Enter. Приложение для Windows: вход по email, 3 дня бесплатно, без своего API-ключа.">
 <link rel="canonical" href="https://dotatranslator.live/ru/">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Dota Translator">
 <meta property="og:title" content="Переводчик чата Dota 2 | Dota Translator">
-<meta property="og:description" content="Переводи чат Dota 2 и отправляй ответы на английском через Ctrl+Enter. Приложение для Windows: вход по email, 3 дня бесплатно, без своего ключа Gemini.">
+<meta property="og:description" content="Переводи чат Dota 2 и отправляй ответы на английском через Ctrl+Enter. Приложение для Windows: вход по email, 3 дня бесплатно, без своего API-ключа.">
 <meta property="og:url" content="https://dotatranslator.live/ru/">
 <meta property="og:image" content="https://dotatranslator.live/logo-512.webp">
 <meta property="og:image:alt" content="Dota Translator logo">
 <meta property="og:locale" content="ru_RU">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Переводчик чата Dota 2 | Dota Translator">
-<meta name="twitter:description" content="Переводи чат Dota 2 и отправляй ответы на английском через Ctrl+Enter. Приложение для Windows: вход по email, 3 дня бесплатно, без своего ключа Gemini.">
+<meta name="twitter:description" content="Переводи чат Dota 2 и отправляй ответы на английском через Ctrl+Enter. Приложение для Windows: вход по email, 3 дня бесплатно, без своего API-ключа.">
 <meta name="twitter:image" content="https://dotatranslator.live/logo-512.webp">
 <link rel="alternate" hreflang="en" href="https://dotatranslator.live/">
 <link rel="alternate" hreflang="ru" href="https://dotatranslator.live/ru/">
 <link rel="alternate" hreflang="x-default" href="https://dotatranslator.live/">
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "@id": "https://dotatranslator.live/#website", "url": "https://dotatranslator.live/", "name": "Dota Translator", "inLanguage": ["en", "ru"]}, {"@type": "WebPage", "@id": "https://dotatranslator.live/ru/#webpage", "url": "https://dotatranslator.live/ru/", "name": "Переводчик чата Dota 2 | Dota Translator", "description": "Переводи чат Dota 2 и отправляй ответы на английском через Ctrl+Enter. Приложение для Windows: вход по email, 3 дня бесплатно, без своего ключа Gemini.", "inLanguage": "ru", "isPartOf": {"@id": "https://dotatranslator.live/#website"}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "@id": "https://dotatranslator.live/#website", "url": "https://dotatranslator.live/", "name": "Dota Translator", "inLanguage": ["en", "ru"]}, {"@type": "WebPage", "@id": "https://dotatranslator.live/ru/#webpage", "url": "https://dotatranslator.live/ru/", "name": "Переводчик чата Dota 2 | Dota Translator", "description": "Переводи чат Dota 2 и отправляй ответы на английском через Ctrl+Enter. Приложение для Windows: вход по email, 3 дня бесплатно, без своего API-ключа.", "inLanguage": "ru", "isPartOf": {"@id": "https://dotatranslator.live/#website"}}]}</script>
 </head>
 <body>
 
@@ -115,7 +115,7 @@
     <div class="cta">
       <a class="btn solid" href="/download.html">Скачать для Windows</a>
     </div>
-    <p class="needs">3 дня бесплатно после первого входа по коду из письма, затем 7 евро за 3 месяца. Свой ключ Gemini не нужен. Только Windows.</p>
+    <p class="needs">3 дня бесплатно после первого входа по коду из письма, затем 7 евро за 3 месяца. Свой API-ключ не нужен. Только Windows.</p>
 
     <div class="demo">
       <div class="bar">так это выглядит (настоящие переводы)</div>
@@ -147,7 +147,8 @@
         <li><b>Оно нажимает клавиши за тебя.</b> По Ctrl+Enter: выделить, скопировать, вставить перевод и Enter, через Windows, как макро-клавиша. Только когда ты сам нажал Ctrl+Enter и только если Дота на переднем плане. В игру ничего не записывается.</li>
         <li><b>Чат приходит из встроенного канала игры</b> (Game State Integration, сделан Valve для оверлеев и стримов). Для этого в папку Доты кладётся один маленький файл настроек.</li>
         <li><b>Смотрит на два маленьких участка экрана</b> - портрет героя у новой строки чата, чтобы показать, кто написал. Ничего не сохраняется и никуда не отправляется.</li>
-        <li><b>Куда уходит текст.</b> Только строки для перевода отправляются через наш сервер в платный API Google Gemini. Текст чата не сохраняется в журнале сервера или базе аккаунтов. <a href="/privacy.html">Конфиденциальность</a>.</li>
+        <li><b>Куда уходит текст.</b> Если перевода ещё нет в кэше, наш сервер одновременно отправляет запрос в Google Gemini и OpenAI с нашими API-ключами и показывает первый подходящий перевод. Текст чата не сохраняется в журнале сервера или базе аккаунтов. <a href="/privacy.html">Конфиденциальность</a>.</li>
+        <li><b>Кто переводит быстрее?</b> В ноябре 2026 года мы проверили 12 примеров входящих сообщений из Dota. GPT-4o mini Fast ответил быстрее Gemini в 10 случаях. Медианное время ответа составило 622 мс у OpenAI и 877 мс у Gemini. Для ответов через Ctrl+Enter вместе с Gemini мы используем GPT-6 Luna Fast, чтобы точнее передать смысл фразы.</li>
         <li><b>Подписка.</b> После 3-дневного пробного периода доступ стоит 7 евро за 3 месяца. Без автопродления и пожизненного тарифа.</li>
         <li><b>Интеграция с игрой.</b> Приложение использует Valve GSI, канал для оверлеев и инструментов стримеров, и не внедряет код в игру.</li>
       </ul>
