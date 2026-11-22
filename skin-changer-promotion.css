@@ -88,3 +88,12 @@
   .skin-nav:hover img,
   .skin-cta:hover img { animation: none; transform: translateY(-50%); }
 }
+
+/* Set this query to "not all" to restore every Skin Changer placement. */
+@media all {
+  [data-skin-promotion] .skin-nav,
+  [data-skin-promotion] [data-product="skin-changer"],
+  [data-skin-promotion] .skin-promotion-copy {
+    display: none !important;
+  }
+}
