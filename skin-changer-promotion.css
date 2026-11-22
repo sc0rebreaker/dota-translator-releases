@@ -96,4 +96,10 @@
   [data-skin-promotion] .skin-promotion-copy {
     display: none !important;
   }
+  @media (width > 780px) {
+    [data-skin-promotion] .related-grid {
+      grid-template-columns: calc((100% - 24px) / 2);
+      justify-content: center;
+    }
+  }
 }
