@@ -2,7 +2,7 @@
   'use strict';
   var token = location.hash.slice(1);
   history.replaceState(null, '', location.pathname);
-  var API = 'https://api.dotaskinchanger.live/translator';
+  var API = 'https://api.dotatranslator.live/translator';
   var button = document.getElementById('signin'), state = document.getElementById('state');
   var analyticsReady = null, completedSignup = '';
   function loadMeasurement() {
